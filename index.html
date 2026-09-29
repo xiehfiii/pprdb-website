@@ -1,0 +1,154 @@
+<!doctype html>
+<html lang="en">
+<head>
+  <meta charset="utf-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1">
+  <meta name="theme-color" content="#15344c">
+  <meta name="description" content="An evidence-curated catalog of experimentally measured plant peptide–receptor binding pairs.">
+  <title>PPRBD · Plant Peptide–Receptor Binding Database</title>
+  <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%2315344c'/%3E%3Cpath d='M15 42c13-22 25-25 34-20M17 45c14-4 25-5 33-3' fill='none' stroke='%2395d1c3' stroke-width='5' stroke-linecap='round'/%3E%3Ccircle cx='46' cy='22' r='5' fill='%23f3bd76'/%3E%3C/svg%3E">
+  <style>
+    :root { color-scheme: light; --ink:#193247; --muted:#5a6b77; --line:#dce4e7; --bg:#f5f8f9; --paper:#fff; --navy:#15344c; --teal:#0e746f; --pale:#e9f4f1; --amber:#a26324; --warm:#fff5e8; font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; }
+    * { box-sizing:border-box; }
+    html { scroll-behavior:smooth; }
+    body { margin:0; color:var(--ink); background:var(--bg); line-height:1.5; font-size:16px; }
+    a { color:var(--teal); }
+    button, input, select { font:inherit; }
+    button { cursor:pointer; }
+    .shell { width:min(1440px, calc(100% - 56px)); margin:auto; }
+    header { background:var(--navy); color:#fff; border-bottom:4px solid #86c9b9; }
+    .head { min-height:104px; display:flex; align-items:center; justify-content:space-between; gap:28px; }
+    .brand { display:flex; align-items:center; gap:17px; }
+    .mark { width:46px; height:46px; border:2px solid #9bd5c7; border-radius:12px; display:grid; place-items:center; flex:none; }
+    .mark svg { width:29px; height:29px; }
+    h1 { font-size:22px; line-height:1.2; letter-spacing:-.035em; margin:0; font-weight:730; }
+    .kicker { font-size:12px; font-weight:700; letter-spacing:.13em; text-transform:uppercase; color:#a5d7cb; margin-bottom:4px; }
+    main { padding:32px 0 60px; }
+    .intro { display:flex; justify-content:space-between; align-items:flex-end; gap:30px; margin-bottom:23px; }
+    .intro h2 { font-size:29px; line-height:1.17; letter-spacing:-.04em; margin:0 0 8px; }
+    .intro p { margin:0; color:var(--muted); max-width:740px; }
+    .download { display:inline-flex; align-items:center; justify-content:center; background:var(--navy); color:#fff; text-decoration:none; border-radius:8px; padding:11px 17px; min-height:44px; white-space:nowrap; font-weight:650; font-size:14px; }
+    .download:hover, .download:focus-visible { background:#285570; }
+    .metrics { display:grid; grid-template-columns:repeat(4, minmax(0, 1fr)); gap:12px; margin-bottom:21px; }
+    .metric { background:var(--paper); border:1px solid var(--line); border-radius:10px; padding:17px 19px 14px; min-height:89px; }
+    .metric strong { display:block; font-size:25px; line-height:1.15; letter-spacing:-.03em; color:var(--navy); }
+    .metric span { display:block; color:var(--muted); font-size:13px; margin-top:6px; }
+    .metric.interactive { text-align:left; width:100%; transition:border-color .15s,background .15s; }
+    .metric.interactive:hover, .metric.interactive:focus-visible { border-color:#61a99d; background:#f0f9f6; outline:none; }
+    .workspace { display:grid; grid-template-columns:minmax(0,1fr) 320px; align-items:start; gap:18px; min-width:0; }
+    .panel, .aside-card { background:var(--paper); border:1px solid var(--line); border-radius:11px; box-shadow:0 2px 12px rgba(20,51,72,.025); min-width:0; }
+    .toolbar { padding:17px; display:grid; grid-template-columns:minmax(260px,1fr) 220px 200px; gap:11px; align-items:end; border-bottom:1px solid var(--line); }
+    .control label { display:block; font-size:12px; font-weight:720; color:#4c6270; letter-spacing:.025em; margin-bottom:6px; }
+    .control input, .control select { width:100%; border:1px solid #c9d5db; border-radius:7px; background:#fff; color:var(--ink); min-height:42px; padding:8px 11px; outline:none; }
+    .control input:focus-visible, .control select:focus-visible { border-color:var(--teal); box-shadow:0 0 0 3px #d7eeea; }
+    .search-wrap { position:relative; }
+    .suggestions { position:absolute; z-index:5; top:calc(100% + 5px); left:0; right:0; background:#fff; border:1px solid #b9d2d3; box-shadow:0 14px 28px rgba(20,51,72,.14); border-radius:8px; padding:6px; max-height:330px; overflow:auto; }
+    .suggestions[hidden] { display:none; }
+    .suggestion { display:flex; width:100%; align-items:center; justify-content:space-between; gap:15px; text-align:left; border:0; background:#fff; border-radius:5px; padding:9px 10px; color:var(--ink); font-size:14px; }
+    .suggestion:hover, .suggestion:focus-visible { background:#e9f4f1; outline:none; }
+    .suggestion small { color:var(--muted); font-size:12px; white-space:nowrap; }
+    .countline { min-height:42px; display:flex; align-items:center; justify-content:space-between; padding:0 18px; color:var(--muted); font-size:13px; }
+    .clear { border:0; background:none; color:var(--teal); font-size:13px; font-weight:650; padding:7px 0; }
+    .scroll { overflow:auto; max-width:100%; }
+    table { border-collapse:collapse; width:100%; min-width:795px; text-align:left; }
+    thead { background:#edf3f5; }
+    th { color:#435b69; font-size:11px; text-transform:uppercase; letter-spacing:.055em; font-weight:760; padding:12px 15px; white-space:nowrap; }
+    td { border-top:1px solid #e8eef0; padding:13px 15px; vertical-align:middle; font-size:14px; }
+    tbody tr:hover { background:#f8fbfb; }
+    .id { color:#607682; font-variant-numeric:tabular-nums; font-size:12px; font-weight:680; }
+    .ligand { color:var(--navy); font-weight:720; }
+    .species { font-style:italic; }
+    .tag { display:inline-flex; align-items:center; border-radius:999px; padding:5px 9px; font-size:11px; font-weight:750; white-space:nowrap; }
+    .tag.binary { background:var(--pale); color:#176d62; }
+    .tag.complex { background:var(--warm); color:var(--amber); }
+    .row-action { color:var(--teal); background:none; border:0; font-weight:750; padding:6px 0; text-decoration:underline; text-underline-offset:3px; }
+    .empty { padding:36px 20px; text-align:center; color:var(--muted); }
+    aside { display:grid; gap:14px; }
+    .aside-card { padding:20px; }
+    .aside-card h3 { margin:0 0 10px; font-size:16px; letter-spacing:-.015em; }
+    .aside-card p { margin:0 0 11px; color:var(--muted); font-size:13px; line-height:1.58; }
+    .aside-card p:last-child { margin-bottom:0; }
+    .aside-card a { font-size:13px; font-weight:680; }
+    .aside-card .subtle { border-top:1px solid var(--line); padding-top:12px; margin-top:12px; }
+    .chips { display:flex; flex-wrap:wrap; gap:7px; margin-top:12px; }
+    .chip { border:1px solid #cedcdd; background:#f8fbfb; color:#315365; border-radius:999px; padding:6px 9px; font-size:12px; line-height:1.25; text-align:left; }
+    .chip:hover, .chip:focus-visible, .chip.active { border-color:#51a395; background:#e4f4ef; color:#0c655c; }
+    .drawer-wrap { position:fixed; inset:0; background:rgba(12,33,48,.42); z-index:10; display:none; }
+    .drawer-wrap.open { display:block; }
+    .drawer { position:absolute; right:0; top:0; bottom:0; width:min(540px,100%); background:#fff; box-shadow:-12px 0 40px rgba(10,30,44,.16); overflow:auto; padding:30px 34px 42px; }
+    .drawer-top { display:flex; justify-content:space-between; align-items:center; gap:15px; }
+    .drawer .eyebrow { font-size:12px; font-weight:740; color:var(--teal); letter-spacing:.06em; }
+    .close { border:1px solid var(--line); background:#fff; border-radius:7px; width:35px; height:35px; font-size:22px; line-height:1; color:var(--ink); }
+    .drawer h2 { font-size:27px; line-height:1.2; margin:17px 0 7px; letter-spacing:-.035em; }
+    .drawer .latin { font-style:italic; color:var(--muted); margin:0 0 17px; }
+    .drawer dl { margin:24px 0; }
+    .drawer dt { font-size:11px; font-weight:790; color:#60727b; text-transform:uppercase; letter-spacing:.06em; margin:20px 0 4px; }
+    .drawer dd { margin:0; color:#253f50; font-size:15px; overflow-wrap:anywhere; }
+    .drawer .doi { display:inline-block; margin-top:8px; font-size:14px; font-weight:700; }
+    .drawer .caution { background:#f1f7f6; border-left:3px solid #5baea0; border-radius:4px; padding:12px 14px; color:#3f5d5c; font-size:13px; }
+    footer { border-top:1px solid var(--line); padding:19px 0 31px; color:var(--muted); font-size:12px; }
+    @media(max-width:1100px) { .workspace { grid-template-columns:1fr; } aside { grid-template-columns:repeat(2,1fr); } }
+    @media(max-width:760px) { .shell { width:min(100% - 28px, 1440px); } .head { min-height:87px; } h1 { font-size:18px; } .intro { align-items:stretch; flex-direction:column; gap:15px; } .intro h2 { font-size:25px; } .download { align-self:flex-start; } .metrics { grid-template-columns:repeat(2,1fr); } .toolbar { grid-template-columns:1fr; } .suggestions { position:relative; top:auto; margin-top:6px; } aside { grid-template-columns:1fr; } .drawer { padding:22px 20px 35px; } }
+  </style>
+</head>
+<body>
+  <header><div class="shell head"><div class="brand"><div class="mark" aria-hidden="true"><svg viewBox="0 0 32 32" fill="none"><path d="M4 24C10 12 19 8 28 8M4 26c9-4 17-5 24-3" stroke="#a7dccf" stroke-width="3" stroke-linecap="round"/><circle cx="25" cy="8" r="3" fill="#eebd79"/></svg></div></div></header>
+  <main class="shell">
+    <section class="intro"><div><h2>Explore experimentally measured binding pairs</h2><p>Search exact plant peptide–receptor records, inspect the binding assay and primary article, and distinguish direct receptor contacts from binding to receptor complexes.</p></div><a class="download" href="plant_LR_final_verified.tsv" download>Download verified records · TSV</a></section>
+    <section class="metrics" aria-label="Database summary"><button type="button" class="metric interactive" id="metric-all"><strong id="metric-pairs">86</strong><span>admitted binding records · show all</span></button><div class="metric"><strong id="metric-species">11</strong><span>plant species · select below</span></div><button type="button" class="metric interactive" id="metric-binary-select"><strong id="metric-binary">81</strong><span>binary receptor binding · filter</span></button><button type="button" class="metric interactive" id="metric-complex-select"><strong id="metric-complex">5</strong><span>receptor-complex binding · filter</span></button></section>
+    <div class="workspace"><section class="panel" aria-label="Binding records"><div class="toolbar"><div class="control"><label for="search">Search ligand, receptor, species or ID</label><div class="search-wrap"><input id="search" type="search" placeholder="e.g. DCC1, RALF23, wheat or rice" autocomplete="off" aria-autocomplete="list" aria-controls="search-suggestions" aria-expanded="false"><div class="suggestions" id="search-suggestions" role="listbox" aria-label="Suggested searches" hidden></div></div></div><div class="control"><label for="species-filter">Species</label><select id="species-filter"><option value="">All species</option></select></div><div class="control"><label for="evidence-filter">Binding form</label><select id="evidence-filter"><option value="">All forms</option><option value="binary receptor binding">Binary receptor binding</option><option value="receptor-complex binding">Receptor complex</option></select></div></div><div class="countline"><span id="countline" role="status" aria-live="polite">Loading records…</span><button class="clear" id="clear" type="button">Clear filters</button></div><div class="scroll"><table><thead><tr><th>ID</th><th>Species</th><th>Ligand</th><th>Receptor / complex</th><th>Evidence form</th><th>Record</th></tr></thead><tbody id="rows"></tbody></table></div><div class="empty" id="empty" hidden>No records match these filters.</div></section><aside><section class="aside-card"><h3>Browse by species</h3><p>Select a plant species to see its measured pairs.</p><div class="chips" id="species-chips"></div></section><section class="aside-card"><h3>What qualifies?</h3><p>Each admitted row names a plant-derived ligand and a receptor or receptor complex from the same species, with an original-study physical-binding assay.</p><p>Genetics, transcript abundance, ROS responses and orthology alone were not used to establish a binding pair.</p></section><section class="aside-card"><h3>Read the evidence carefully</h3><p>Binding to an isolated receptor and binding to a multicomponent complex are displayed separately. An in-vitro interaction does not automatically establish signalling in planta.</p><p class="subtle">The 96 candidate pairs yielded 86 admitted, 9 unresolved and 1 excluded record. This is an evidence-curated snapshot, not a claim of exhaustive coverage.</p></section></aside></div>
+  </main>
+  <div class="drawer-wrap" id="drawer-wrap" aria-hidden="true"><section class="drawer" role="dialog" aria-modal="true" aria-labelledby="drawer-title" tabindex="-1"><div class="drawer-top"><span class="eyebrow" id="drawer-id"></span><button type="button" class="close" id="close" aria-label="Close record">×</button></div><h2 id="drawer-title"></h2><p class="latin" id="drawer-species"></p><span class="tag" id="drawer-tag"></span><dl id="drawer-fields"></dl><p class="caution" id="drawer-boundary"></p><a class="doi" id="drawer-link" target="_blank" rel="noopener noreferrer">Open original article</a></section></div>
+  <footer><div class="shell">Pair-level curation of the 2026-09-29 source snapshot. Cite the original research article for each interaction; this site is a discovery and audit interface, not a substitute for the paper.</div></footer>
+  <script src="fuzzy-search.js"></script>
+  <script>
+    const $ = id => document.getElementById(id);
+    let records = [], searchEngine = null, lastFocus = null;
+    function parseTSV(text) { const lines = text.replace(/^\uFEFF/, '').trim().split(/\r?\n/); const cols = lines.shift().split('\t'); return lines.filter(Boolean).map(line => Object.fromEntries(line.split('\t').map((v,i) => [cols[i],v]))); }
+    function tag(form) { return form === 'receptor-complex binding' ? '<span class="tag complex">Receptor complex</span>' : '<span class="tag binary">Binary receptor</span>'; }
+    function makeCell(row, text, className='') { const cell=document.createElement('td'); cell.textContent=text; if(className) cell.className=className; row.append(cell); return cell; }
+    function hideSuggestions() { $('search-suggestions').hidden=true; $('search').setAttribute('aria-expanded','false'); }
+    function showSuggestions() {
+      const box=$('search-suggestions'), query=$('search').value.trim(); box.replaceChildren();
+      if (!searchEngine || query.length<2) { hideSuggestions(); return; }
+      const items=searchEngine.suggest(query);
+      for (const item of items) {
+        const button=document.createElement('button'); button.type='button'; button.className='suggestion'; button.setAttribute('role','option');
+        const name=document.createElement('span'), meta=document.createElement('small'); name.textContent=item.value; meta.textContent=`${item.type} · ${item.ids.size} ${item.ids.size===1?'record':'records'}`;
+        button.append(name,meta); button.addEventListener('click',()=>{$('search').value=item.value;hideSuggestions();render();$('search').focus();});
+        button.addEventListener('keydown',event=>{if(event.key==='Escape'){hideSuggestions();$('search').focus();}else if(event.key==='ArrowDown'||event.key==='ArrowUp'){event.preventDefault();const buttons=[...box.querySelectorAll('button')],current=buttons.indexOf(button),step=event.key==='ArrowDown'?1:-1;buttons[(current+step+buttons.length)%buttons.length].focus();}});
+        box.append(button);
+      }
+      box.hidden=items.length===0; $('search').setAttribute('aria-expanded',String(items.length>0));
+    }
+    function render() {
+      const q=$('search').value.trim(), s=$('species-filter').value, f=$('evidence-filter').value;
+      const filtered=(searchEngine?searchEngine.search(q):records.map(record=>({record,score:0}))).filter(({record:r}) => (!s || r.species===s) && (!f || r.evidence_form===f));
+      const body=$('rows'); body.replaceChildren();
+      for(const {record:r} of filtered) { const tr=document.createElement('tr'); makeCell(tr,r.pair_id,'id'); makeCell(tr,r.species,'species'); makeCell(tr,r.ligand_tested,'ligand'); makeCell(tr,r.receptor_or_complex_tested); const ev=document.createElement('td'); ev.innerHTML=tag(r.evidence_form); tr.append(ev); const action=document.createElement('td'); const button=document.createElement('button'); button.type='button'; button.className='row-action'; button.textContent='View evidence'; button.setAttribute('aria-label','View evidence for '+r.pair_id); button.addEventListener('click',()=>openRecord(r,button)); action.append(button); tr.append(action); body.append(tr); }
+      $('countline').textContent=`${filtered.length} of ${records.length} records shown${q?' · ranked by relevance':''}`;
+      $('empty').hidden=filtered.length!==0;
+      document.querySelectorAll('.chip').forEach(button=>button.classList.toggle('active',button.dataset.species===s));
+    }
+    function openRecord(r, sourceButton) {
+      lastFocus=sourceButton; $('drawer-id').textContent=r.pair_id; $('drawer-title').textContent=`${r.ligand_tested} · ${r.receptor_or_complex_tested}`; $('drawer-species').textContent=r.species;
+      $('drawer-tag').className='tag '+(r.evidence_form==='receptor-complex binding'?'complex':'binary'); $('drawer-tag').textContent=r.evidence_form==='receptor-complex binding'?'Receptor-complex binding':'Binary receptor binding';
+      const fields=[['Physical contact unit',r.physical_contact_unit],['Binding experiment',r.binding_assay],['Original figure or table',r.figure_or_table],['Source audit depth',r.audit_depth],['DOI',r.primary_doi]]; const dl=$('drawer-fields'); dl.replaceChildren(); for(const [label,value] of fields) { const dt=document.createElement('dt'),dd=document.createElement('dd'); dt.textContent=label; dd.textContent=value||'Not specified'; dl.append(dt,dd); }
+      $('drawer-boundary').textContent=r.important_boundary||'Interpret this binding result within the original study.'; $('drawer-link').href=r.primary_url; $('drawer-wrap').classList.add('open'); $('drawer-wrap').setAttribute('aria-hidden','false'); document.body.style.overflow='hidden'; $('close').focus();
+    }
+    function closeRecord() { $('drawer-wrap').classList.remove('open'); $('drawer-wrap').setAttribute('aria-hidden','true'); document.body.style.overflow=''; if(lastFocus)lastFocus.focus(); }
+    $('close').addEventListener('click',closeRecord); $('drawer-wrap').addEventListener('click',e=>{if(e.target===$('drawer-wrap'))closeRecord();}); document.addEventListener('keydown',e=>{if(e.key==='Escape'&&$('drawer-wrap').classList.contains('open'))closeRecord();else if(e.key==='Escape')hideSuggestions();});
+    $('search').addEventListener('input',()=>{render();showSuggestions();});
+    $('search').addEventListener('focus',showSuggestions);
+    $('search').addEventListener('keydown',event=>{if(event.key==='ArrowDown'&&!$('search-suggestions').hidden){event.preventDefault();$('search-suggestions').querySelector('button')?.focus();}});
+    document.addEventListener('click',event=>{if(!event.target.closest('.search-wrap'))hideSuggestions();});
+    for(const id of ['species-filter','evidence-filter']) $(id).addEventListener('change',render);
+    $('clear').addEventListener('click',()=>{$('search').value='';$('species-filter').value='';$('evidence-filter').value='';hideSuggestions();render();$('search').focus();});
+    $('metric-all').addEventListener('click',()=>{$('search').value='';$('species-filter').value='';$('evidence-filter').value='';render();document.querySelector('.workspace').scrollIntoView({behavior:'smooth'});});
+    $('metric-binary-select').addEventListener('click',()=>{$('evidence-filter').value='binary receptor binding';render();document.querySelector('.workspace').scrollIntoView({behavior:'smooth'});});
+    $('metric-complex-select').addEventListener('click',()=>{$('evidence-filter').value='receptor-complex binding';render();document.querySelector('.workspace').scrollIntoView({behavior:'smooth'});});
+    fetch('plant_LR_final_verified.tsv').then(r=>{if(!r.ok)throw Error('Data unavailable');return r.text();}).then(text=>{records=parseTSV(text);searchEngine=PPRSearch.create(records);const species=[...new Set(records.map(r=>r.species))].sort();for(const s of species){const option=document.createElement('option');option.value=s;option.textContent=s;$('species-filter').append(option);const chip=document.createElement('button');chip.type='button';chip.className='chip';chip.dataset.species=s;chip.textContent=s+' · '+records.filter(r=>r.species===s).length;chip.addEventListener('click',()=>{$('species-filter').value=$('species-filter').value===s?'':s;render();document.querySelector('.workspace').scrollIntoView({behavior:'smooth'});});$('species-chips').append(chip);} $('metric-pairs').textContent=records.length; $('metric-species').textContent=species.length; $('metric-binary').textContent=records.filter(r=>r.evidence_form==='binary receptor binding').length; $('metric-complex').textContent=records.filter(r=>r.evidence_form==='receptor-complex binding').length;render();}).catch(()=>{$('countline').textContent='Records could not be loaded.';$('empty').hidden=false;$('empty').textContent='Please refresh the page or download the source table.';});
+  </script>
+</body>
+</html>
+
