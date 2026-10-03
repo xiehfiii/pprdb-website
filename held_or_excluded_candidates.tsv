@@ -1,0 +1,11 @@
+candidate_id	species	ligand	receptor	doi	status	reason
+H-01	Oryza sativa	OsIMP1	OsRLK5	10.1016/j.molp.2025.09.015	hold	Original abstract says directly binds, but the pair-specific assay or structure panel could not be independently recovered for this release.
+H-02	Oryza sativa	OsRALF17/OsRALF19	OsMTD2	10.1111/jipb.13508	hold	Original abstract says bind; exact individual pair-level physical assay was not recovered. The 2025 RUPO paper calls RUPO putative and reports response/colocalization, not purified RUPO-ligand binding.
+H-03	Arabidopsis thaliana	PCP-B-class peptides	ANJEA-FERONIA complex	10.1126/science.abc6107	hold	Original abstract reports competition for complex binding, but exact PCP-B peptide identities and their individual wet-lab binding panels remain unresolved.
+H-04	Arabidopsis thaliana	CLE19	BAM3/SERK1/2	10.1093/plphys/kiag599	hold	Abstract reports complex assembly and modeling; no independently located direct CLE19-BAM3 binding trace.
+H-05	Lotus japonicus	CLE-RS1	HAR1	10.1038/ncomms3191	hold	Competition against labelled CLE-RS2 alone does not demonstrate a CLE-RS1-HAR1 physical complex.
+H-07	Arabidopsis thaliana	CIF3	GSO2	10.1073/pnas.1911553117	hold	Cited figure tests CIF3-GSO1, not CIF3-GSO2.
+H-08	Arabidopsis thaliana	AtPep2/3/5/6	PEPR1/2	10.1105/tpc.109.068874	hold	Cited assay is competition; these exact peptide-receptor complexes were not individually demonstrated.
+H-09	Arabidopsis thaliana	PSK	AtPSKR1	10.1038/nature14858	exclude	Cited structure/assay used carrot DcPSKR1, not Arabidopsis AtPSKR1.
+H-10	Oryza sativa	PSK-alpha	120/160-kDa rice membrane binding proteins	10.1074/jbc.275.20.15520	hold	Radioligand/photoaffinity binding is real, but the 120/160-kDa receptor proteins were not molecularly identified for a named receptor record.
+H-11	Zea mays	FCP1/CLE peptides	FEA receptors		hold	Genetic pathway assignment found; no pair-specific physical binding assay confirmed in this search.
