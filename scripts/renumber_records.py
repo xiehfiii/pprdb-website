@@ -9,7 +9,9 @@ from __future__ import annotations
 
 import argparse
 import csv
+import hashlib
 import re
+from datetime import date
 from pathlib import Path
 
 
@@ -105,10 +107,28 @@ def renumber_release(site: Path, audit: Path) -> None:
     write_tsv(decisions_path, decision_fields, decisions)
     write_tsv(manuscript_path, manuscript_fields, manuscript)
     write_tsv(full_audit_path, audit_fields, all_pairs)
+    html_path = site / "index.html"
+    html = html_path.read_text(encoding="utf-8")
+    version = hashlib.sha256(official_path.read_bytes()).hexdigest()[:12]
+    for filename, expected_matches in (
+        ("plant_LR_final_verified.tsv", 2),
+        ("held_or_excluded_candidates.tsv", 1),
+        ("review_22_decisions.tsv", 1),
+    ):
+        file_version = hashlib.sha256((site / filename).read_bytes()).hexdigest()[:12]
+        html, matches = re.subn(
+            rf"{re.escape(filename)}\?v=[A-Za-z0-9-]+",
+            f"{filename}?v={file_version}",
+            html,
+        )
+        if matches != expected_matches:
+            raise ValueError(f"Expected {expected_matches} cache-versioned references for {filename}, found {matches}")
+    html_path.write_text(html, encoding="utf-8")
     for name in ("plant_LR_final_verified.tsv", "held_or_excluded_candidates.tsv", "review_22_decisions.tsv"):
         (audit / name).write_bytes((site / name).read_bytes())
     crosswalk_fields = ["previous_id", "current_id", "disposition", "species", "ligand", "receptor", "doi"]
-    write_tsv(audit / "id_crosswalk_20261004.tsv", crosswalk_fields, crosswalk)
+    crosswalk_path = audit / f"id_crosswalk_{date.today():%Y%m%d}_{version}.tsv"
+    write_tsv(crosswalk_path, crosswalk_fields, crosswalk)
     print(f"Renumbered {len(official)} admitted records and {len(held)} held/excluded claims.")
 
 
