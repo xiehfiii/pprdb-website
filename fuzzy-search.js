@@ -1,4 +1,4 @@
-/* Small deterministic search index for the fixed 86-record evidence snapshot. */
+/* Small deterministic search index for the current evidence snapshot. */
 window.PPRSearch = (() => {
   const aliases = {
     'Arabidopsis thaliana': ['arabidopsis', 'thale cress', '拟南芥'],
