@@ -1,4 +1,4 @@
-# PPRBD
+# PPRDB
 
 An evidence-curated catalogue of **plant-derived peptide–receptor physical binding**. The 3 October 2026 snapshot contains 118 records from 11 plant species. The website is published at [www.pprdb.com](https://www.pprdb.com/).
 

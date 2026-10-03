@@ -4,8 +4,41 @@
   <meta charset="utf-8">
   <meta name="viewport" content="width=device-width, initial-scale=1">
   <meta name="theme-color" content="#15344c">
-  <meta name="description" content="An evidence-curated catalog of experimentally measured plant peptide–receptor binding pairs.">
-  <title>PPRBD · Plant Peptide–Receptor Binding Database</title>
+  <meta name="description" content="PPRDB is an open, evidence-curated plant peptide–receptor binding database. Search experimentally measured ligand–receptor pairs by species, gene or record ID and inspect their primary-study evidence.">
+  <meta name="robots" content="index, follow">
+  <link rel="canonical" href="https://www.pprdb.com/">
+  <meta property="og:type" content="website">
+  <meta property="og:site_name" content="PPRDB">
+  <meta property="og:title" content="PPRDB | Plant Peptide–Receptor Binding Database">
+  <meta property="og:description" content="Search experimentally measured plant peptide–receptor binding pairs and inspect the primary-study evidence behind each record.">
+  <meta property="og:url" content="https://www.pprdb.com/">
+  <meta name="twitter:card" content="summary">
+  <title>PPRDB | Plant Peptide–Receptor Binding Database</title>
+  <script type="application/ld+json">
+    {
+      "@context": "https://schema.org",
+      "@graph": [
+        {
+          "@type": "WebSite",
+          "name": "PPRDB",
+          "alternateName": "Plant Peptide–Receptor Binding Database",
+          "url": "https://www.pprdb.com/",
+          "description": "An evidence-curated database of experimentally measured plant peptide–receptor binding pairs."
+        },
+        {
+          "@type": "Dataset",
+          "name": "PPRDB plant peptide–receptor binding records",
+          "description": "A dated, evidence-curated literature snapshot of plant-derived peptide and receptor or receptor-complex physical binding experiments, with primary DOI and assay details for each record.",
+          "url": "https://www.pprdb.com/",
+          "distribution": {
+            "@type": "DataDownload",
+            "encodingFormat": "text/tab-separated-values",
+            "contentUrl": "https://www.pprdb.com/plant_LR_final_verified.tsv"
+          }
+        }
+      ]
+    }
+  </script>
   <link rel="icon" type="image/svg+xml" href="data:image/svg+xml,%3Csvg xmlns='http://www.w3.org/2000/svg' viewBox='0 0 64 64'%3E%3Crect width='64' height='64' rx='14' fill='%2315344c'/%3E%3Cpath d='M15 42c13-22 25-25 34-20M17 45c14-4 25-5 33-3' fill='none' stroke='%2395d1c3' stroke-width='5' stroke-linecap='round'/%3E%3Ccircle cx='46' cy='22' r='5' fill='%23f3bd76'/%3E%3C/svg%3E">
   <style>
     :root { color-scheme: light; --ink:#193247; --muted:#5a6b77; --line:#dce4e7; --bg:#f5f8f9; --paper:#fff; --navy:#15344c; --teal:#0e746f; --pale:#e9f4f1; --amber:#a26324; --warm:#fff5e8; font-family: Inter, ui-sans-serif, -apple-system, BlinkMacSystemFont, "Segoe UI", sans-serif; }
@@ -92,7 +125,7 @@
   </style>
 </head>
 <body>
-  <header><div class="shell head"><div class="brand"><div class="mark" aria-hidden="true"><svg viewBox="0 0 32 32" fill="none"><path d="M4 24C10 12 19 8 28 8M4 26c9-4 17-5 24-3" stroke="#a7dccf" stroke-width="3" stroke-linecap="round"/><circle cx="25" cy="8" r="3" fill="#eebd79"/></svg></div></div></header>
+  <header><div class="shell head"><div class="brand"><div class="mark" aria-hidden="true"><svg viewBox="0 0 32 32" fill="none"><path d="M4 24C10 12 19 8 28 8M4 26c9-4 17-5 24-3" stroke="#a7dccf" stroke-width="3" stroke-linecap="round"/><circle cx="25" cy="8" r="3" fill="#eebd79"/></svg></div><div><div class="kicker">Plant Peptide–Receptor Binding Database</div><h1>PPRDB</h1></div></div></div></header>
   <main class="shell">
     <section class="intro"><div><h2>Explore experimentally measured binding pairs</h2><p>Search exact plant peptide–receptor records, inspect the binding assay and primary article, and distinguish direct receptor contacts from binding to receptor complexes.</p></div><a class="download" href="plant_LR_final_verified.tsv" download>Download verified records · TSV</a></section>
     <section class="metrics" aria-label="Database summary"><button type="button" class="metric interactive" id="metric-all"><strong id="metric-pairs">118</strong><span>admitted binding records · show all</span></button><div class="metric"><strong id="metric-species">11</strong><span>plant species · select below</span></div><button type="button" class="metric interactive" id="metric-binary-select"><strong id="metric-binary">116</strong><span>binary receptor binding · filter</span></button><button type="button" class="metric interactive" id="metric-complex-select"><strong id="metric-complex">2</strong><span>receptor-complex binding · filter</span></button></section>
